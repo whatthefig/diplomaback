@@ -39,14 +39,14 @@ const articleSchema = new mongoose.Schema({
     required: true,
   },
   owner: {
-    type: mongoose.Schema.Types.String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
-    select: false,
+    select: true,
   },
   date: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: true,
   },
 });
 

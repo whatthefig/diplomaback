@@ -1,15 +1,16 @@
-const articlesRout = require('express').Router();
+const articleRout = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const {
-  createArticle, getArticles, deleteArticle,
+  createArticle, getArticles, deleteArticle, findArticle
 } = require('../controllers/articles');
 
-articlesRout.post('/articles', celebrate({
+articleRout.post('/articles', celebrate({
   body: Joi.object().keys({
     keyword: Joi.string().required(),
     title: Joi.string().required(),
+    date: Joi.string().required(),
     text: Joi.string().required(),
     source: Joi.string().required(),
     link: Joi.string().uri().required(),
@@ -17,12 +18,14 @@ articlesRout.post('/articles', celebrate({
   }),
 }), createArticle);
 
-articlesRout.delete('/articles/:articleId', celebrate({
+articleRout.delete('/articles/:articleId', celebrate({
   params: Joi.object().keys({
     articleId: Joi.objectId(),
   }),
 }), deleteArticle);
 
-articlesRout.get('/articles', getArticles);
+articleRout.get('/articles', getArticles);
 
-module.exports = articlesRout;
+articleRout.get('/articles/:articleId', findArticle);
+
+module.exports = articleRout;

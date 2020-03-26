@@ -5,13 +5,9 @@ const User = require('../models/user');
 const MyError = require('../modules/error');
 
 module.exports.findUser = (req, res, next) => {
-  const { userId } = req.params;
-  User.findById(userId)
+  User.findOne({ _id: req.user._id })
     .then((user) => {
-      if (!user) {
-        throw new MyError('Пользователь не найден', 404);
-      }
-      res.json(user);
+      res.send({ message: `mail: ${user.email}, name: ${user.name}` });
     })
     .catch(next);
 };
