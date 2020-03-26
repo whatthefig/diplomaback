@@ -3,7 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const {
-  createArticle, getArticles, deleteArticle, findArticle
+  createArticle, getArticles, deleteArticle,
 } = require('../controllers/articles');
 
 articleRout.post('/articles', celebrate({
@@ -25,7 +25,5 @@ articleRout.delete('/articles/:articleId', celebrate({
 }), deleteArticle);
 
 articleRout.get('/articles', getArticles);
-
-articleRout.get('/articles/:articleId', findArticle);
 
 module.exports = articleRout;
