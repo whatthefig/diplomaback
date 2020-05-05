@@ -1,4 +1,7 @@
 require('dotenv').config();
+
+const { PORT = 3001, MONGO_URL, NODE_ENV } = process.env;
+var cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -13,10 +16,9 @@ console.log(process.env.NODE_ENV);
 const app = express();
 app.use(cookieParser());
 
-const { PORT = 3001, MONGO_URL, NODE_ENV } = process.env;
-
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,6 +38,14 @@ app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
+});
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+
+  next();
 });
 
 app.use(indexRout);
