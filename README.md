@@ -1,10 +1,10 @@
 <h1>Дипломная работа</h1>
 
-http://www.mesto-web.site/
+http://www.news-searcher.site/
 
-https://www.mesto-web.site/
+https://www.news-searcher.site/
 
-ip: 84.201.141.7
+ip: 84.201.137.194
 
 *v0.0.1*
 
