@@ -33,8 +33,8 @@
     "nodemon": "^1.19.4"
   },
   "scripts": {
-    "start": "cross-env node app.js",
-    "dev": "cross-env nodemon app.js"
+    "start": "cross-env NODE_ENV=production node app.js",
+    "dev": "cross-env NODE_ENV=dev nodemon app.js"
   },
   "keywords": [],
   "description": "<h1>Дипломная работа backend</h1>",
