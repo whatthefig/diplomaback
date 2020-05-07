@@ -33,7 +33,7 @@
     "nodemon": "^1.19.4"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node app.js",
+    "start": "cross-env node app.js",
     "dev": "cross-env NODE_ENV=dev nodemon app.js"
   },
   "keywords": [],
