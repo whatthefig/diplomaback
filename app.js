@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
-app.use (cors ({credentials: true, origin: ' localhost: 3001 '}));
+app.use (cors ({credentials: true, origin: ' http://localhost:8080/ '}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,19 +39,12 @@ app.get('/crash-test', () => {
 });
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8000/');
-  res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 
   next();
 });
-
-
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3001'
-)
 
 app.use(indexRout);
 app.use(errorLogger);
