@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
-app.use (cors ({credentials: true, origin: ' localhost:8080 '}));
+app.use (cors ({credentials: true}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
