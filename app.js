@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
-app.use (cors ({credentials: true}));
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,14 +36,6 @@ app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-});
-
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-
-  next();
 });
 
 app.use(indexRout);
