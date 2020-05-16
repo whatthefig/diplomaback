@@ -14,6 +14,7 @@ const MyError = require('./modules/error');
 console.log(process.env.NODE_ENV);
 
 const app = express();
+
 app.use(cookieParser());
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
@@ -41,7 +42,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(indexRout);
+// app.use(indexRout);
+app.use('/api', (indexRout));
+
 app.use(errorLogger);
 app.use(errors());
 
