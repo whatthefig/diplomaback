@@ -14,7 +14,7 @@ articleRout.post('/articles', celebrate({
     text: Joi.string().required(),
     source: Joi.string().required(),
     link: Joi.string().uri().required(),
-    image: Joi.string().uri().required(),
+    image: Joi.string().uri(),
   }),
 }), createArticle);
 

@@ -36,7 +36,7 @@ const articleSchema = new mongoose.Schema({
       },
       message: 'Эта строка должна быть URL',
     },
-    required: true,
+    required: false,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
