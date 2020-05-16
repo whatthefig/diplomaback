@@ -22,7 +22,7 @@ const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhos
 
 app.use('/api', require('../router'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'diplomafront')));
 
 app.use(cors({
   origin: 'http://localhost:8080',
