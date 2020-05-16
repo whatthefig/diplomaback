@@ -3,7 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const {
-  createArticle, getArticles, deleteArticle, getMyArticles, 
+  createArticle, getArticles, deleteArticle, getMyArticles,
 } = require('../controllers/articles');
 
 articleRout.post('/articles', celebrate({
