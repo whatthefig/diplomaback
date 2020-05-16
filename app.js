@@ -16,13 +16,11 @@ console.log(process.env.NODE_ENV);
 
 const app = express();
 app.use(cookieParser());
+app.use('/api', require('./routes'));
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
-
-app.use('/api', require('../router'));
-
-app.use(express.static(path.join(__dirname, '../diplomafront')));
+app.use(express.static(path.join(__dirname, 'diplomafront')));
 
 app.use(cors({
   origin: 'http://localhost:8080',
