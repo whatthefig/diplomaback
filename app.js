@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { PORT = 3001, MONGO_URL, NODE_ENV } = process.env;
-var cors = require('cors');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -18,8 +18,11 @@ app.use(cookieParser());
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
-app.use(cors());
-app.use(cookieParser());
+app.use(cors({
+  origin: 'http://localhost:8080',
+  optionsSuccessStatus: 200,
+  credentials: true,
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
