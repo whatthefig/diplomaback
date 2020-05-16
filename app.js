@@ -4,6 +4,7 @@ const { PORT = 3001, MONGO_URL, NODE_ENV } = process.env;
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -44,7 +45,7 @@ app.get('/crash-test', () => {
 
 // app.use(indexRout);
 app.use('/api', (indexRout));
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(errorLogger);
 app.use(errors());
 
