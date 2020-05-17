@@ -21,7 +21,7 @@ app.use(cookieParser());
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
 app.use(cors({
-  origin: 'https://whatthefig.github.io',
+  origin: ('https://whatthefig.github.io', 'http://localhost:8080'),
   optionsSuccessStatus: 200,
   credentials: true,
 }));
