@@ -1,6 +1,10 @@
 require('dotenv').config();
+
+const { PORT = 3001, MONGO_URL, NODE_ENV } = process.env;
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -11,13 +15,16 @@ const MyError = require('./modules/error');
 console.log(process.env.NODE_ENV);
 
 const app = express();
-app.use(cookieParser());
 
-const { PORT = 3001, MONGO_URL, NODE_ENV } = process.env;
+app.use(cookieParser());
 
 const MONGO_ADRESS = NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mydb';
 
-app.use(cookieParser());
+app.use(cors({
+  origin: ('https://whatthefig.github.io', 'http://localhost:8080'),
+  optionsSuccessStatus: 200,
+  credentials: true,
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -28,8 +35,6 @@ mongoose.connect(MONGO_ADRESS, {
   useFindAndModify: false,
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(requestLogger);
 
 app.get('/crash-test', () => {
@@ -38,7 +43,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(indexRout);
+// app.use(indexRout);
+app.use('/api', (indexRout));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(errorLogger);
 app.use(errors());
 

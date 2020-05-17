@@ -37,6 +37,12 @@ module.exports.getArticles = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.getMyArticles = (req, res, next) => {
+  Article.find({ owner: req.user._id })
+    .then((articles) => res.send({ articles }))
+    .catch(next);
+};
+
 module.exports.findArticle = (req, res, next) => {
   const { articleId } = req.params;
   Article.findById(articleId)

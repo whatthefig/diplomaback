@@ -7,7 +7,10 @@ const MyError = require('../modules/error');
 module.exports.findUser = (req, res, next) => {
   User.findOne({ _id: req.user._id })
     .then((user) => {
-      res.send({ message: `mail: ${user.email}, name: ${user.name}` });
+      res.send({
+        name: user.name,
+        email: user.email,
+      });
     })
     .catch(next);
 };
@@ -47,10 +50,18 @@ module.exports.login = (req, res, next) => {
         .cookie('jwt', token, {
           maxAge: 3600 * 24 * 7,
           httpOnly: true,
-          sameSite: true,
+          sameSite: false,
         })
         .send({ message: 'Авторизация прошла успешно' })
         .end();
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res) => {
+  res.cookie('jwt', {
+    maxAge: -1,
+    sameSite: false,
+  })
+    .send({ message: 'Пользователь разлогинен' });
 };

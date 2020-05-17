@@ -3,7 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const {
-  createUser, login,
+  createUser, login, logout,
 } = require('../controllers/users');
 
 reglogRout.post('/signup', celebrate({
@@ -20,5 +20,7 @@ reglogRout.post('/signin', celebrate({
     password: Joi.string().required().min(8),
   }),
 }), login);
+
+reglogRout.post('/logout', logout);
 
 module.exports = reglogRout;
